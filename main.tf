@@ -31,6 +31,6 @@ resource "linode_instance" "vpn-us-se" {
     }
 
     provisioner "local-exec" {
-        command = "ANSIBLE_HOST_KEY_CHECKING=False ansible-playbook -u root -i '${self.ip_address}' --private-key ${var.pvt_key} -e 'pub_key=${var.ssh_key}' ovpn-install.yml"
+        command = "ANSIBLE_HOST_KEY_CHECKING=False ansible-playbook -u root -i '${self.ip_address}' --private-key ${var.pvt_key} -e 'pub_key=${var.ideapad_key}' ovpn-install.yml"
     }
 }
