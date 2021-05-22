@@ -16,7 +16,7 @@ resource "linode_instance" "vpn-us-se" {
     image = "linode/ubuntu20.04"
     region = "us-southeast"
     type = "g6-nanode-1"
-    authorized_keys = [var.ideapad_key]
+    authorized_keys = [var.ideapad_key, var.ideapad_key_ed25519]
     root_pass = var.root_pass
 
     provisioner "remote-exec" {
@@ -31,6 +31,6 @@ resource "linode_instance" "vpn-us-se" {
     }
 
     provisioner "local-exec" {
-        command = "ansible-playbook -i '${self.ip_address}' --private-key ${var.pvt_key} -e 'pub_key=${var.ideapad_key}' ovpn-install.yml"
+        command = "ANSIBLE_HOST_KEY_CHECKING=False ansible-playbook -u root -i '${self.ip_address},' --private-key ${var.pvt_key} -e 'pub_key=${var.ideapad_key}' ovpn-install.yml"
     }
 }
