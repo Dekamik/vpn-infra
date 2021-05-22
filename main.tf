@@ -13,10 +13,10 @@ provider "linode" {
 
 resource "linode_instance" "vpn-us-se" {
     label = "vpn-us-se"
-    image = "linode/ubuntu20.04lts"
+    image = "linode/ubuntu20.04"
     region = "us-southeast"
     type = "g6-nanode-1"
-    authorized_keys = [var.ideapad_key, var.legion_key]
+    authorized_keys = [var.ideapad_key]
     root_pass = var.root_pass
 
     provisioner "remote-exec" {
@@ -26,7 +26,7 @@ resource "linode_instance" "vpn-us-se" {
             host = self.ip_address
             type = "ssh"
             user = "root"
-            private_key = file(var.pvt_key)
+            password = var.root_pass
         }
     }
 
