@@ -9,12 +9,20 @@
 
     - name: Download OpenVPN installation script
       get_url:
-        url: https://git.io/vpn
-        dest: /opt/openvpn-ubuntu-install.sh
+        url: https://raw.githubusercontent.com/angristan/openvpn-install/master/openvpn-install.sh
+        dest: /opt/openvpn-install.sh
         mode: 0700
 
-    - name: Install OpenVPN
-      shell: /opt/openvpn-ubuntu-install.sh
+    - name: Install and setup OpenVPN
+      shell: /opt/openvpn-install.sh
+      environment:
+        AUTO_INSTALL: y
+        CLIENT: "{{ lookup('env', 'SERVER_NAME') }}"
+    
+    - name: Download ovpn config
+      fetch:
+        src: ~/client.ovpn
+        dest: "~/vpn"
 
   handlers:
     - name: Restart OpenVPN

@@ -11,16 +11,15 @@ provider "linode" {
     token = var.token
 }
 
-resource "linode_instance" "vpn-us-se" {
-    label = "vpn-us-se"
+resource "linode_instance" "vpn-us" {
+    label = "vpn-us"
     image = "linode/ubuntu20.04"
     region = "us-southeast"
     type = "g6-nanode-1"
     authorized_keys = [var.ideapad_key, var.ideapad_key_ed25519]
-    root_pass = var.root_pass
 
     provisioner "remote-exec" {
-        inline = ["sudo apt update", "sudo apt install python3 -y"]
+        inline = ["echo 'export SERVER_NAME=vpn-us' >> ~/.profile", "sudo apt update", "sudo apt install python3 -y"]
 
         connection {
             host = self.ip_address
