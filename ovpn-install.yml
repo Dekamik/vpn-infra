@@ -1,0 +1,25 @@
+- become: yes
+  hosts: all
+  name: ovpn-install
+  tasks:
+    - name: Add the user 'dennis' and add it to 'sudo'
+      user:
+        name: dennis
+        group: sudo
+    - name: Add SSH key to 'dennis'
+      authorized_key:
+        user: dennis
+        state: present
+        key: "{{ lookup('file', ssh_key) }}"
+    - name: Update all packages
+      apt:
+        upgrade: dist
+        update_cache: yes
+        cache_valid_time: 3600
+    - name: Download OpenVPN installation script
+      get_url:
+        url: https://git.io/vpn
+        dest: /opt/openvpn-ubuntu-install.sh
+        mode: 0440
+    - name: Install OpenVPN
+      ansible.builtin.script: /opt/openvpn-ubuntu-install.sh
