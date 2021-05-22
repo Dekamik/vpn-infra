@@ -23,3 +23,9 @@
         mode: 0440
     - name: Install OpenVPN
       ansible.builtin.script: /opt/openvpn-ubuntu-install.sh
+  
+  # TODO: Change configuration options
+
+  handlers:
+    - name: Restart OpenVPN
+      service: name=openvpn-server@server state=restarted
