@@ -2,18 +2,19 @@
   hosts: all
   name: ovpn-install
   tasks:
+
     - name: Update all packages
       apt:
-        upgrade: dist
         update_cache: yes
-        cache_valid_time: 3600
+
     - name: Download OpenVPN installation script
       get_url:
         url: https://git.io/vpn
         dest: /opt/openvpn-ubuntu-install.sh
         mode: 0700
+
     - name: Install OpenVPN
-      ansible.builtin.script: /opt/openvpn-ubuntu-install.sh
+      shell: /opt/openvpn-ubuntu-install.sh
 
   handlers:
     - name: Restart OpenVPN
