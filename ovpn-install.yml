@@ -3,17 +3,17 @@
   name: ovpn-install
   tasks:
 
-    - name: Update all packages
+    - name: Update apt packages
       apt:
         update_cache: yes
 
-    - name: Download OpenVPN installation script
+    - name: Download openvpn-install.sh
       get_url:
         url: https://raw.githubusercontent.com/angristan/openvpn-install/master/openvpn-install.sh
         dest: /opt/openvpn-install.sh
         mode: 0700
 
-    - name: Install and setup OpenVPN
+    - name: Run openvpn-install.sh
       shell: /opt/openvpn-install.sh
       environment:
         AUTO_INSTALL: y
@@ -22,7 +22,7 @@
     - name: Download ovpn config
       fetch:
         src: ~/client.ovpn
-        dest: "~/vpn"
+        dest: ~/vpn
 
   handlers:
     - name: Restart OpenVPN
