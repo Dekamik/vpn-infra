@@ -23,7 +23,3 @@
       fetch:
         src: ~/client.ovpn
         dest: ~/vpn
-
-  handlers:
-    - name: Restart OpenVPN
-      service: name=openvpn@server state=restarted
