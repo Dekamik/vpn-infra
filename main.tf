@@ -16,7 +16,7 @@ resource "linode_instance" "vpn-us" {
     image = "linode/ubuntu20.04"
     region = "us-southeast"
     type = "g6-nanode-1"
-    authorized_keys = [var.ideapad_key, var.ideapad_key_ed25519]
+    authorized_keys = [var.ideapad_key, var.ideapad_key_ed25519, var.legion_key]
 
     provisioner "remote-exec" {
         inline = ["echo 'export SERVER_NAME=vpn-us' >> ~/.profile", "sudo apt update", "sudo apt install python3 -y"]

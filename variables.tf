@@ -5,3 +5,4 @@ variable "pvt_key" {}
 # Public keys
 variable "ideapad_key" {}
 variable "ideapad_key_ed25519" {}
+variable "legion_key" {}
