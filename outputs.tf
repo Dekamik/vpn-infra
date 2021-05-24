@@ -1,3 +1,5 @@
-output "IP-US" {
-  value = linode_instance.vpn-us.ip_address
+output "IP-addresses" {
+  value = tomap({
+    for k, r in linode_instance.vpn-servers : k => r.ip_address
+  })
 }

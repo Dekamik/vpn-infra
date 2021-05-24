@@ -22,4 +22,4 @@
     - name: Download ovpn config
       fetch:
         src: ~/client.ovpn
-        dest: ~/vpn
+        dest: ~/SynologyDrive/Private/Auth/vpn/
