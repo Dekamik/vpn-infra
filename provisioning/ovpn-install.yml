@@ -1,11 +1,7 @@
-- become: yes
+- name: Setup OpenVPN
+  become: yes
   hosts: all
-  name: ovpn-install
   tasks:
-
-    - name: Update apt packages
-      apt:
-        update_cache: yes
 
     - name: Download openvpn-install.sh
       get_url:
