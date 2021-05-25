@@ -26,7 +26,6 @@ resource "linode_instance" "vpn-servers" {
 
     provisioner "remote-exec" {
         inline = [
-            "echo 'export SERVER_NAME=${each.key}' >> ~/.profile",
             "sudo apt update",
             "sudo apt install python3 -y"
         ]
@@ -40,6 +39,6 @@ resource "linode_instance" "vpn-servers" {
     }
 
     provisioner "local-exec" {
-        command = "ANSIBLE_HOST_KEY_CHECKING=False ansible-playbook -u root -i '${self.ip_address},' --private-key ${var.pvt_key} -e 'pub_key=${var.ideapad_key}' provisioning/ovpn-install.yml"
+        command = "ansible-playbook -u root -i '${self.ip_address},' --private-key ${var.pvt_key} -e 'server_name=${each.key}' provisioning/ovpn-install.yml"
     }
 }

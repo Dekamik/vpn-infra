@@ -13,7 +13,7 @@
       shell: /opt/openvpn-install.sh
       environment:
         AUTO_INSTALL: y
-        CLIENT: "{{ lookup('env', 'SERVER_NAME') }}"
+        CLIENT: {{ server_name }}
     
     - name: Download ovpn config
       fetch:
