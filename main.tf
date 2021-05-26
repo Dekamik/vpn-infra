@@ -1,7 +1,7 @@
 terraform {
     required_providers {
         linode = {
-            source = "linode/linode"
+            source  = "linode/linode"
             version = "1.16.0"
         }
     }
@@ -14,10 +14,10 @@ provider "linode" {
 resource "linode_instance" "vpn-servers" {
     for_each = var.vpn_regions
 
-    label = each.key
-    image = each.value.image
-    region = each.value.linode_region
-    type = each.value.type
+    label           = each.key
+    image           = each.value.image
+    region          = each.value.linode_region
+    type            = each.value.type
     authorized_keys = values(var.public_keys)
 
     provisioner "remote-exec" {
@@ -27,9 +27,9 @@ resource "linode_instance" "vpn-servers" {
         ]
 
         connection {
-            host = self.ip_address
-            type = "ssh"
-            user = "root"
+            host        = self.ip_address
+            type        = "ssh"
+            user        = "root"
             private_key = file(var.pvt_key)
         }
     }

@@ -23,25 +23,25 @@ To configure your environment you need to create a file named `terraform.tfvars`
 `Example - terraform.tfvars`
 ```terraform
 # Provisioning
-token = "<YOUR LINODE API KEY>"
+token        = "<YOUR LINODE API KEY>"
 download_dir = "~/Path/To/VPN/Folder/"
 
 # Public keys
 public_keys = {
     laptop_key = "<YOUR PUBLIC SSH KEY>"
-    pc_key = "<YOUR PUBLIC SSH KEY>"
+    pc_key     = "<YOUR PUBLIC SSH KEY>"
 }
 
 vpn_regions = {
     vpn-us = {
         linode_region = "us-east"
-        type = "g6-nanode-1"
-        image = "linode/ubuntu20.04"
+        type          = "g6-nanode-1"
+        image         = "linode/ubuntu20.04"
     },
     vpn-uk = {
         linode_region = "eu-west"
-        type = "g6-nanode-1"
-        image = "linode/ubuntu20.04"
+        type          = "g6-nanode-1"
+        image         = "linode/ubuntu20.04"
     }
 }
 ```
