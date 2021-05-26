@@ -15,18 +15,11 @@ variable "download_dir" {
 }
 
 variable "public_keys" {
-    description = "List of public ssh keys to add to your servers."
+    description = "Map of public ssh keys to add to your servers."
     type = map
 }
 
 variable "vpn_regions" {
     description = "Map of VPN servers to create"
     type = map
-    default = {
-        vpn-us = {
-            linode_region = "us-east"
-            type = "g6-nanode-1"
-            image = "linode/ubuntu20.04"
-        }
-    }
 }
