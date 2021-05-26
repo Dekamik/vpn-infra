@@ -13,9 +13,10 @@
       shell: /opt/openvpn-install.sh
       environment:
         AUTO_INSTALL: y
-        CLIENT: {{ server_name }}
+        CLIENT: "{{ server_name }}"
     
     - name: Download ovpn config
       fetch:
-        src: ~/client.ovpn
-        dest: ~/SynologyDrive/Private/Auth/vpn/
+        src: ~/{{ server_name }}.ovpn
+        dest: "{{ dl_dir }}/"
+        flat: yes

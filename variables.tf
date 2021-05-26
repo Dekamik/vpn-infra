@@ -1,15 +1,26 @@
-# Provisioning credentials
-variable "token" {}
-variable "pvt_key" {}
+# Provisioning
+variable "token" {
+    description = "Linode API token."
+    type = string
+}
+variable "pvt_key" {
+    description = "Path to private SSH key."
+    type = string
+    default = "~/.ssh/id_rsa"
+}
+variable "download_dir" {
+    description = "Path to directory where VPN-client files will be downloaded."
+    type = string
+    default = "~/vpn/"
+}
 
-# Public keys
-variable "ideapad_key" {}
-variable "ideapad_key_ed25519" {}
-variable "legion_key" {}
+variable "public_keys" {
+    description = "List of public ssh keys to add to your servers."
+    type = map
+}
 
-# VPN Regions
-variable "regions" {
-    description = "Map of regions"
+variable "vpn_regions" {
+    description = "Map of VPN servers to create"
     type = map
     default = {
         vpn-us = {

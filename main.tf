@@ -12,17 +12,13 @@ provider "linode" {
 }
 
 resource "linode_instance" "vpn-servers" {
-    for_each = var.regions
+    for_each = var.vpn_regions
 
     label = each.key
     image = each.value.image
     region = each.value.linode_region
     type = each.value.type
-    authorized_keys = [
-        var.ideapad_key, 
-        var.ideapad_key_ed25519, 
-        var.legion_key
-    ]
+    authorized_keys = values(var.public_keys)
 
     provisioner "remote-exec" {
         inline = [
@@ -39,6 +35,6 @@ resource "linode_instance" "vpn-servers" {
     }
 
     provisioner "local-exec" {
-        command = "ansible-playbook -u root -i '${self.ip_address},' --private-key ${var.pvt_key} -e 'server_name=${each.key}' provisioning/ovpn-install.yml"
+        command = "ansible-playbook -u root -i '${self.ip_address},' --private-key ${var.pvt_key} -e 'server_name=${each.key} dl_dir=${var.download_dir}' provisioning/ovpn-install.yml"
     }
 }
