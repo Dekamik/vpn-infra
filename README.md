@@ -12,7 +12,9 @@ This project require these programs to run:
 * Terraform
 * Ansible
 
-You must also have generated an SSH key for your computer. As of 2021-05-26 it has to use RSA algorithm, not ED25519. 
+You must also have generated an SSH key for your computer. As of 2021-05-26 it has to use the RSA algorithm, not ED25519. 
+
+You must also have created an account on Linode as well as generated an API Token for your account.
 
 ### Configuring your VPN servers
 
@@ -53,6 +55,6 @@ Now that you've created your configuration, it's time to create your servers.
 3. Run `terraform plan` to check your configuration
 4. If all is clear, run `terraform apply` to start the provisioning.
 
-When these commands are run the above configuration in `terraform.tfvars` will create 2 VPN-servers, upload `laptop_key` and `pc_key` as authorized keys for SSH login and download the VPN client files (`vpn-us.ovpn` and `vpn-uk.ovpn`) to `~/Path/To/VPN/Folder/`.
+When these commands are run the above configuration in `terraform.tfvars` will create 2 virtual VPN-servers, upload `laptop_key` and `pc_key` as authorized keys for SSH login and download the VPN client files (`vpn-us.ovpn` and `vpn-uk.ovpn`) to `~/Path/To/VPN/Folder/`.
 
 And boom! Now you have your own VPN-servers.
