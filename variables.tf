@@ -1,13 +1,14 @@
-# Provisioning
 variable "token" {
     description = "Your Linode API token used to access your resources at Linode."
     type        = string
 }
+
 variable "pvt_key" {
     description = "Path to your private SSH key file."
     type        = string
     default     = "~/.ssh/id_rsa"
 }
+
 variable "download_dir" {
     description = "Path to a directory on your coputer to which all VPN-client files will be downloaded."
     type        = string
