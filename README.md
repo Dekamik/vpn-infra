@@ -58,3 +58,57 @@ Now that you've created your configuration, it's time to create your servers.
 When these commands are run the above configuration in `terraform.tfvars` will create 2 virtual VPN-servers, upload `laptop_key` and `pc_key` as authorized keys for SSH login and download the VPN client files (`vpn-us.ovpn` and `vpn-uk.ovpn`) to `~/Path/To/VPN/Folder/`.
 
 And boom! Now you have your own VPN-servers.
+
+## Configuration variables reference
+
+### token
+
+Your Linode API token used to access your resources at Linode.
+
+### pvt_key
+
+Path to your private SSH key file.
+
+Default: `"~/.ssh/id_rsa"`
+
+### download_dir
+
+Path to a directory on your coputer to which all VPN-client files will be downloaded.
+
+Default: `"~/vpn/"`
+
+### public_keys
+
+A map of public ssh keys to add to authorized_keys on your VPN-servers.
+
+Example:
+```
+public_keys = {
+    laptop_key = "<YOUR PUBLIC SSH KEY>"
+    pc_key     = "<YOUR PUBLIC SSH KEY>"
+}
+```
+
+### vpn_regions
+
+A map containing configurations for the VPN servers to create:
+
+* linode_region: the VPN server's Linode data center region.
+* type: the Linode server type
+* image: Linux image to install on server
+
+Example:
+```
+vpn_regions = {
+    vpn-us = {
+        linode_region = "us-east"
+        type          = "g6-nanode-1"
+        image         = "linode/ubuntu20.04"
+    },
+    vpn-uk = {
+        linode_region = "eu-west"
+        type          = "g6-nanode-1"
+        image         = "linode/ubuntu20.04"
+    }
+}
+```
